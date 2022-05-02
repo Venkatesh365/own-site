@@ -1,42 +1,37 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 import './index.css'
+
 class LoginForm extends Component {
   state = {
     username: '',
     password: '',
-    showSubmitError: false,
-    errorMsg: '',
+   
+   
   }
-
-  onChangeUsername = event => {
-    this.setState({username: event.target.value})
-  }
-
-  onChangePassword = event => {
-    this.setState({password: event.target.value})
-  }
-
-  onSubmitSuccess = jwtToken => {
+ 
+  
+ 
+  onSubmitSuccess = (jwtTkoken) => {
     const {history} = this.props
-
-    Cookies.set('jwt_token', jwtToken, {expires: 30})
+    Cookies.set('jwtToken', jwtTkoken, {
+      expires: 30,
+      path: '/',
+    })
     history.replace('/')
   }
-
-  onSubmitFailure = errorMsg => {
-    this.setState({showSubmitError: true, errorMsg})
-  }
-
+ 
+ 
   submitForm = async event => {
     event.preventDefault()
     const registerData = JSON.stringify(this.state);
-   
+    
    
     axios({
         method: 'POST',
-        url: 'https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/login',
+        url: ' https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/login',
         headers: {
             'Content-Type': 'application/json',
                 },
@@ -45,23 +40,32 @@ class LoginForm extends Component {
     })
     
     .then(data =>{
-       console.log(data)
+       console.log(data.data.jwtToken)
        if(data.status === 200 ){
-         this.onSubmitSuccess()
+         this.onSubmitSuccess(data.data.jwtToken)
        }
-       else {
-        this.onSubmitFailure(data.error_msg)
-      }
       
-    }).catch(err =>{
-      console.log(err);
+      
+    }).catch(err=>{
+      if(err){
+        alert("*username and password required")
+      }
     })
+  
+    
+  }
+  onChangeUsername = event => {
+    this.setState({username: event.target.value})
     
   }
 
+  onChangePassword = event => {
+    this.setState({password: event.target.value})
+  }
 
   renderPasswordField = () => {
     const {password} = this.state
+  
     return (
       <>
         <label className="input-label" htmlFor="password">
@@ -72,6 +76,7 @@ class LoginForm extends Component {
           id="password"
           className="password-input-filed"
           value={password}
+          
           onChange={this.onChangePassword}
         />
       </>
@@ -80,6 +85,7 @@ class LoginForm extends Component {
 
   renderUsernameField = () => {
     const {username} = this.state
+   
     return (
       <>
         <label className="input-label" htmlFor="username">
@@ -97,7 +103,10 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {showSubmitError, errorMsg} = this.state
+    const jwtToken = Cookies.get('jwtToken')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="login-form-container">
         <img
@@ -117,11 +126,11 @@ class LoginForm extends Component {
             alt="website logo"
           />
           <div className="input-container">{this.renderUsernameField()}</div>
+          
           <div className="input-container">{this.renderPasswordField()}</div>
           <button type="submit" className="login-button">
             Login
           </button>
-          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
         </form>
       </div>
     )
