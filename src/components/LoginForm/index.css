@@ -17,7 +17,7 @@
 }
 
 .login-website-logo-mobile-image {
-  width: 165px;
+  width: 100px;
   margin-top: 50px;
   margin-bottom: 35px;
 }
@@ -42,7 +42,7 @@
 }
 
 .login-website-logo-desktop-image {
-  width: 185px;
+  width: 100px;
 }
 
 @media screen and (max-width: 991px) {

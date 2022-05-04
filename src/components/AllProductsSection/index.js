@@ -1,60 +1,98 @@
-import { Component } from "react";
-import Cookies from "js-cookie";
+import {Component} from 'react'
+import Loader from 'react-loader-spinner'
+import Cookies from 'js-cookie'
 
-import ProductCard from "../ProductCard";
+import ProductCard from '../ProductCard'
+import ProductsHeader from '../ProductsHeader'
+import './index.css'
+
+const sortbyOptions = [
+  {
+    optionId: 'https://hi--lo.herokuapp.com/products/high-price',
+    displayText: 'Price (High-Low)',
+  },
+  {
+    optionId: 'https://hi--lo.herokuapp.com/products/low-price',
+    displayText: 'Price (Low-High)',
+  },
+]
 
 class AllProductsSection extends Component {
   state = {
     productsList: [],
-  };
+    isLoading: false,
+    activeOptionId: sortbyOptions[0].optionId,
+  }
 
   componentDidMount() {
-    this.getProducts();
+    this.getProducts()
   }
 
   getProducts = async () => {
-    const apiUrl = "https://apis.ccbp.in/products";
-    const jwtToken = Cookies.get("jwt_token");
+    this.setState({
+      isLoading: true,
+    })
+    const jwtToken = Cookies.get('jwtToken')
+    const {activeOptionId} = this.state
+    
+    const apiUrl = activeOptionId
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
-      method: "GET",
-    };
-    const response = await fetch(apiUrl, options);
-    if (response.ok === true) {
-      const fetchedData = await response.json();
-      const updatedData = fetchedData.products.map((product) => ({
+      method: 'GET',
+    }
+    const response = await fetch(apiUrl, options)
+    if (response.ok) {
+      const fetchedData = await response.json()
+      const fD = {fetchedData}
+      const updatedData = fD.fetchedData.map(product => ({
         title: product.title,
         brand: product.brand,
         price: product.price,
         id: product.id,
         imageUrl: product.image_url,
         rating: product.rating,
-      }));
+      }))
       this.setState({
         productsList: updatedData,
-      });
+        isLoading: false,
+      })
     }
-  };
+  }
+
+  updateActiveOptionId = activeOptionId => {
+    this.setState({activeOptionId}, this.getProducts)
+  }
 
   renderProductsList = () => {
-    const { productsList } = this.state;
+    const {productsList, activeOptionId} = this.state
     return (
-      <div>
-        <h1 className="products-list-heading">All Products</h1>
+      <>
+        <ProductsHeader
+          activeOptionId={activeOptionId}
+          sortbyOptions={sortbyOptions}
+          updateActiveOptionId={this.updateActiveOptionId}
+        />
         <ul className="products-list">
-          {productsList.map((product) => (
+          {productsList.map(product => (
             <ProductCard productData={product} key={product.id} />
           ))}
         </ul>
-      </div>
-    );
-  };
+      </>
+    )
+  }
+
+  renderLoader = () => (
+    <div className="products-loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
 
   render() {
-    return <>{this.renderProductsList()}</>;
+    const {isLoading} = this.state
+    return isLoading ? this.renderLoader() : this.renderProductsList()
   }
 }
 
-export default AllProductsSection;
+export default AllProductsSection
