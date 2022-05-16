@@ -1,3 +1,5 @@
+import {BsFilterRight} from 'react-icons/bs'
+
 import './index.css'
 
 const ProductsHeader = props => {
@@ -10,7 +12,9 @@ const ProductsHeader = props => {
     <div className="products-header">
       <h1 className="products-list-heading">All Products</h1>
       <div className="sort-by-container">
-        <h1 className="sort-by">Sort by</h1>
+     
+      <BsFilterRight className="sort-by-icon" />
+        <h1 className="sort-by">Category</h1>
         <select
           className="sort-by-select"
           value={activeOptionId}
@@ -18,15 +22,19 @@ const ProductsHeader = props => {
         >
           {sortbyOptions.map(eachOption => (
             <option
-              key={eachOption.optionId}
-              value={eachOption.optionId}
+              key={eachOption.categoryId}
+              value={eachOption.categoryId}
               className="select-option"
             >
-              {eachOption.displayText}
+              {eachOption.name}
+           
             </option>
           ))}
+          
         </select>
+        
       </div>
+      
     </div>
   )
 }

@@ -7,15 +7,19 @@ import Cart from './components/Cart'
 import NotFound from './components/NotFound'
 import Upload from './components/Upload'
 import ProtectedRoute from './components/ProtectedRoute'
+import Profile from './components/Profile'
 import './App.css'
 
 
 const App = () => (
+  
   <BrowserRouter>
     <Switch>
+    <ProtectedRoute exact path="/profile" component={Profile} />
       <Route exact path="/create an account" component={Register} />
       <ProtectedRoute exact path="/upload" component={Upload} />
       <Route exact path="/login" component={LoginForm} />
+
       <ProtectedRoute exact path="/" component={Home} />
       <ProtectedRoute exact path="/products" component={Products} />
       <ProtectedRoute exact path="/cart" component={Cart} />

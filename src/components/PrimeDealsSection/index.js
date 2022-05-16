@@ -29,7 +29,7 @@ class PrimeDealsSection extends Component {
     })
 
     const jwtToken = Cookies.get('jwtToken')
-    const apiUrl = 'https://e-r-r.herokuapp.com/prime-deals'
+    const apiUrl = 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/prime-deals'
     const options = {
       
       headers: {
@@ -41,7 +41,6 @@ class PrimeDealsSection extends Component {
     if (response.ok === true) {
       const fetchedData = await response.json()
       const fD = {fetchedData}
-      console.log(typeof(fD))
       const updatedData = fD.fetchedData.map(product => ({
         title: product.title,
         brand: product.brand,
@@ -85,7 +84,7 @@ class PrimeDealsSection extends Component {
   )
   renderLoadingView = () => (
     <div className="products-loader-container">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+      <Loader type="Oval" color="#0b69ff" height="50" width="50" />
     </div>
   )
 

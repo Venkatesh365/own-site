@@ -10,6 +10,7 @@ const Products = () => (
     <div className="product-sections">
       <PrimeDealsSection/>
       <AllProductsSection />
+    
      
     </div>
   </>

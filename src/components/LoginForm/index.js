@@ -5,12 +5,15 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import './index.css'
 
+
 class LoginForm extends Component {
   state = {
     username: '',
     password: ''
   }
- 
+
+
+
   onSubmitSuccess = (jwtTkoken) => {
     const {history} = this.props;
     Cookies.set('jwtToken', jwtTkoken, {
@@ -19,17 +22,19 @@ class LoginForm extends Component {
     })
     history.replace('/');
   }
- 
+  
   submitForm = async event => {
     event.preventDefault();
     const {username} = this.state
+    localStorage.setItem("username",username)
+    
     const {password} = this.state
     if(username !== "" && password !== ""){
       const registerData = JSON.stringify(this.state)
-      console.log(registerData)
+      
       axios({
           method: 'POST',
-          url: 'https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/login',
+          url: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/login',
           headers: {
               'Content-Type': 'application/json',
                   },

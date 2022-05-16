@@ -8,12 +8,24 @@ import './index.css'
 
 const sortbyOptions = [
   {
-    optionId: 'https://hi--lo.herokuapp.com/products/high-price',
-    displayText: 'Price (High-Low)',
+    name: 'Clothing',
+    categoryId: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/clothing',
   },
   {
-    optionId: 'https://hi--lo.herokuapp.com/products/low-price',
-    displayText: 'Price (Low-High)',
+    name: 'Electronics',
+    categoryId:'https://e-c-o-m-m-e-r-c-e.herokuapp.com/electronics',
+  },
+  {
+    name: 'Appliances',
+    categoryId: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/appliances',
+  },
+  {
+    name: 'Grocery',
+    categoryId:  'https://e-c-o-m-m-e-r-c-e.herokuapp.com/grocery',
+  },
+  {
+    name: 'Toys',
+    categoryId: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/toys',
   },
 ]
 
@@ -21,7 +33,7 @@ class AllProductsSection extends Component {
   state = {
     productsList: [],
     isLoading: false,
-    activeOptionId: sortbyOptions[0].optionId,
+    activeOptionId: sortbyOptions[0].categoryId,
   }
 
   componentDidMount() {
@@ -54,6 +66,8 @@ class AllProductsSection extends Component {
         imageUrl: product.image_url,
         rating: product.rating,
       }))
+    
+
       this.setState({
         productsList: updatedData,
         isLoading: false,
@@ -85,7 +99,7 @@ class AllProductsSection extends Component {
 
   renderLoader = () => (
     <div className="products-loader-container">
-      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    <Loader type="Oval" color="blue" height="50" width="50" />
     </div>
   )
 

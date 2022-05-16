@@ -1,3 +1,4 @@
+
 import './index.css'
 
 const ProductCard = props => {
@@ -6,6 +7,7 @@ const ProductCard = props => {
 
   return (
     <li className="product-item">
+
       <img src={imageUrl} alt="product" className="thumbnail" />
       <h1 className="title">{title}</h1>
       <p className="brand">by {brand}</p>

@@ -33,6 +33,9 @@ const Header = props => {
           <Link to="/upload" className="nav-link">
             <li>Upload</li>
           </Link>
+          <Link to="/profile" className="nav-link">
+            <li>Profile</li>
+          </Link>
         </ul>
         <button
           type="button"
@@ -91,7 +94,16 @@ const Header = props => {
               />
             </li>
           </Link>
-         
+          <Link to="/profile">
+            
+          <li className="nav-menu-item-mobile">
+              <img
+                src="https://www.freeiconspng.com/thumbs/profile-icon-png/user-icon-png-person-user-profile-icon-20.png"
+                alt="nav cart"
+                className="nav-bar-image"
+              />
+            </li>
+          </Link>
           
         </ul>
       </div>

@@ -25,18 +25,15 @@ class Register extends Component {
     const {location}=this.state
     if(username !== "" && password !== ""&&name!==""&&gender!==""&&location!==""){
       const registerData = JSON.stringify(this.state)
-      console.log(registerData)
       axios({
           method: 'POST',
-          url: 'https://a-u-t-h-e-n-t-i-c-a-t-i-o-n.herokuapp.com/users/',
+          url: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/users/',
           headers: {
               'Content-Type': 'application/json',
                   },
           data: registerData  
       })     
       .then(data => {
-         const objData = data
-         console.log(objData.data)
          if(data.status === 200 ){
            this.onSubmitSuccess()
          }if(data.data==="User already exists"){
@@ -103,6 +100,7 @@ class Register extends Component {
               value={this.state.password}         
               onBlur={e => { if(e.target.value === ""){ alert("Password is required")}} }
               onChange={this.onChangePassword}
+            
             />
           </div>
           <div className="input-container">

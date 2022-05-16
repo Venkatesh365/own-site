@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import axios from 'axios'
-
+import Header from '../Header'
 class Upload extends Component {
   state = {
     title:'',
@@ -8,7 +8,8 @@ class Upload extends Component {
     price: '',
     id:'',
     image_url:'',
-    rating:''
+    rating:'',
+    category:''
     
   }
 
@@ -40,17 +41,15 @@ class Upload extends Component {
     const {title} = this.state
     const {brand} = this.state
     const {price} = this.state
-    console.log(typeof(price))
     const {id} = this.state
-    console.log(typeof(id))
     const {image_url}=this.state
-    console.log(image_url)
     const {rating}=this.state
-    if((title !== "") && (brand !== "") && (price !== "") && (id !== "") && (image_url !== "") && (rating !== "")){
+    const{category}=this.state
+    if((title !== "") && (brand !== "") && (price !== "") && (id !== "") && (image_url !== "") && (rating !== "")&&(category!=="")){
       const registerData = JSON.stringify(this.state)
       axios({
           method: 'POST',
-          url: 'https://e-r-r.herokuapp.com/upload',
+          url: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/upload',
           headers: {
               'Content-Type': 'application/json',
                   },
@@ -84,10 +83,14 @@ class Upload extends Component {
   onChangeRating = event => {
     this.setState({rating: event.target.value})
   }
-
+  onChangeCategory = event => {
+    this.setState({category: event.target.value})
+  }
   render() {
    
     return (
+      <>
+      <Header/>
       <div className="login-form-container">
       
         <form className="form-container" onSubmit={this.submitForm}>
@@ -162,11 +165,25 @@ class Upload extends Component {
               onChange={this.onChangeRating}
             />
           </div>
+          <div className="input-container">
+            <label className="input-label" htmlFor="category">CATEGORY</label>
+            <input
+              type="text"
+              id="category"
+              className="username-input-filed"
+              value={this.state.category}
+              onBlur={e => { if(e.target.value === ""  ){ alert("category is required")}} }
+              onChange={this.onChangeCategory}
+            />
+          </div>
           <button type="submit" className="login-button">
             Upload
           </button>
+        
         </form>
+        
       </div>
+      </>
     )
   }
 }
