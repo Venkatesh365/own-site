@@ -3,8 +3,9 @@ import './index.css'
 
 const ProductCard = props => {
   const {productData} = props
+  
   const {title, brand, imageUrl, rating, price} = productData
-
+ 
   return (
     <li className="product-item">
 
@@ -20,7 +21,10 @@ const ProductCard = props => {
             alt="star"
             className="star"
           />
+
+       
         </div>
+
       </div>
     </li>
   )

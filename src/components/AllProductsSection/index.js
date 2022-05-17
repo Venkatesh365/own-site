@@ -72,7 +72,9 @@ class AllProductsSection extends Component {
         productsList: updatedData,
         isLoading: false,
       })
+      
     }
+    
   }
 
   updateActiveOptionId = activeOptionId => {
