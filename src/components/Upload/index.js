@@ -1,6 +1,24 @@
 import { Component } from 'react'
 import axios from 'axios'
 import Header from '../Header'
+
+const cO = [
+  {
+    name: 'Clothing'
+  },
+  {
+    name: 'Electronics'
+  },
+  {
+    name: 'Appliances',
+  },
+  {
+    name: 'Grocery',
+  },
+  {
+    name: 'Toys',
+  },
+]
 class Upload extends Component {
   state = {
     title:'',
@@ -60,7 +78,7 @@ class Upload extends Component {
          if(data.status === 200 ){
            this.onSubmitSuccess()
          }if(data.data === "User already exists"){
-             alert("User already exists")
+             alert("Product already exists")
          }
       }    
       )
@@ -167,14 +185,25 @@ class Upload extends Component {
           </div>
           <div className="input-container">
             <label className="input-label" htmlFor="category">CATEGORY</label>
-            <input
-              type="text"
+            <select
+           
               id="category"
               className="username-input-filed"
               value={this.state.category}
-              onBlur={e => { if(e.target.value === ""  ){ alert("category is required")}} }
               onChange={this.onChangeCategory}
-            />
+
+              
+            >  {cO.map(eachOption => (
+              <option
+                key={eachOption.name}
+                value={eachOption.name}
+                className="select-option"
+              >
+                {eachOption.name}
+              </option>
+            ))}
+          </select>
+          
           </div>
           <button type="submit" className="login-button">
             Upload
