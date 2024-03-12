@@ -9,23 +9,23 @@ import './index.css'
 const sortbyOptions = [
   {
     name: 'Clothing',
-    categoryId: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/clothing',
+    categoryId: 'http://18.225.31.10:4001/clothing',
   },
   {
     name: 'Electronics',
-    categoryId:'https://e-c-o-m-m-e-r-c-e.herokuapp.com/electronics',
+    categoryId:'http://18.225.31.10:4001/electronics',
   },
   {
     name: 'Appliances',
-    categoryId: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/appliances',
+    categoryId: 'http://18.225.31.10:4001/appliances',
   },
   {
     name: 'Grocery',
-    categoryId:  'https://e-c-o-m-m-e-r-c-e.herokuapp.com/grocery',
+    categoryId:  'http://18.225.31.10:4001/grocery',
   },
   {
     name: 'Toys',
-    categoryId: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/toys',
+    categoryId: 'http://18.225.31.10:4001/toys',
   },
 ]
 
