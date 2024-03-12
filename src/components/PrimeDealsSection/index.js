@@ -29,7 +29,7 @@ class PrimeDealsSection extends Component {
     })
 
     const jwtToken = Cookies.get('jwtToken')
-    const apiUrl = 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/prime-deals'
+    const apiUrl = 'http://18.225.31.10:4001/prime-deals'
     const options = {
       
       headers: {
