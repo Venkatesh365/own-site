@@ -34,7 +34,7 @@ class LoginForm extends Component {
       
       axios({
           method: 'POST',
-          url: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/login',
+          url: 'http://18.225.31.10:4001/login',
           headers: {
               'Content-Type': 'application/json',
                   },
