@@ -27,7 +27,7 @@ class Register extends Component {
       const registerData = JSON.stringify(this.state)
       axios({
           method: 'POST',
-          url: 'https://e-c-o-m-m-e-r-c-e.herokuapp.com/users/',
+          url: 'http://18.225.31.10:4001/users/',
           headers: {
               'Content-Type': 'application/json',
                   },
